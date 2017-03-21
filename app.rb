@@ -25,6 +25,28 @@ oac = OAuth2::Client.new(settings.client_id, settings.client_secret,
 # validator ensures that requests coming from Manifold are properly signed.
 validator = ManifoldcoSignature::Verifier.new settings.master_key
 
+# We'll use sessions to track users that have logged in via Manifold
+set :session_secret, "not secret at all"
+enable :sessions
+
+# The cool dashboard. A user has to be authenticated with Manifold to use this.
+
+get '/dashboard' do
+  halt 401, 'you must be logged in with Manifold'  unless session[:token]
+
+  token = OAuth2::AccessToken.from_hash oac, session[:token]
+
+  profile = token.get '/v1/self'
+  resource = token.get "/v1/resources/#{session[:resource]}"
+
+  <<-HTML
+  <body>
+  <p> hi #{profile.parsed['target']['name']}, you are logged in</p>
+
+  <p>your resource: #{resource.parsed['name']}</p>
+  HTML
+end
+
 # Endpoints to implement the provider api for Manifold
 
 put '/v1/resources/:id' do
@@ -66,6 +88,10 @@ end
 # validator against them.
 get '/v1/sso' do
   token = oac.auth_code.get_token(params[:code])
+  session[:token] = token.to_hash
+  session[:resource] = params[:resource_id]
+
+  redirect to '/dashboard'
 end
 
 # End provider api endpoints.
