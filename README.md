@@ -39,7 +39,7 @@ bundle exec ./app.rb
 grafton test --product=bonnets --plan=small --region=aws::us-east-1 \
     --client-id=21jtaatqj8y5t0kctb2ejr6jev5w8 \
     --client-secret=3yTKSiJ6f5V5Bq-kWF0hmdrEUep3m3HKPTcPX7CdBZw \
-    --sso-port=3001 \
+    --connector-port=3001 \
     --new-plan=large \
     http://localhost:4567/v1
 
