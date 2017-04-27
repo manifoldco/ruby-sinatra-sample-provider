@@ -41,7 +41,7 @@ grafton test --product=bonnets --plan=small --region=aws::us-east-1 \
     --client-secret=3yTKSiJ6f5V5Bq-kWF0hmdrEUep3m3HKPTcPX7CdBZw \
     --connector-port=3001 \
     --new-plan=large \
-    http://localhost:4567/v1
+    http://localhost:4567
 
 # If everything went well, you'll be greeted with plenty of green check marks!
 ```
