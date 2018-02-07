@@ -111,7 +111,7 @@ put '/v1/credentials/:id' do
 
   status 201
   json :message => 'your cat bonnet password is ready', :credentials => {
-    :password => 'meow'
+    :PASSWORD => 'meow'
   }
 end
 
