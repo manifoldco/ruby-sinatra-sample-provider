@@ -1,16 +1,12 @@
 # Sample Manifold Provider (Ruby/Sinatra)
 
-This repo contains a a minimal provider using Sinatra and Ruby.
+This repo contains a minimal provider using Sinatra and Ruby.
 It provides digital cat bonnets as a service; fun!
 
 # Testing the app with Grafton
 
-Grafton is the test framework used to verify your provider implementation is
-correct.
-
-Contact [support@manifold.co](mailto:support@manifold.co) to get access to
-Grafton.
-
+[Grafton](https://github.com/manifoldco/grafton) is the test framework used to
+verify your provider implementation is correct.
 
 To use Grafton to verify this sample provider:
 
