@@ -110,7 +110,7 @@ get '/v1/resources/:id/measures' do
     :resource_id => params['id'],
     :period_start => params['period_start'],
     :period_end => params['period_end'],
-    :measures => { 'product-a' => 0, 'product-b' => 1000 }
+    :measures => { 'feature-a' => 0, 'feature-b' => 1000 }
   )
 end
 
