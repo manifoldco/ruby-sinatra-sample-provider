@@ -83,8 +83,8 @@ patch '/v1/resources/:id' do
   body = JSON.parse(request.body.read)
   halt 400, json(:message => 'bad plan') unless plans.include? body['plan']
 
-  product = db[:resources][params['id']]
-  halt 404, json(:message => 'no such resource') if product.nil?
+  resource = db[:resources][params['id']]
+  halt 404, json(:message => 'no such resource') if resource.nil?
 
   status 200
   json :message => 'your digital cat bonnet has been changed'
@@ -94,10 +94,26 @@ delete '/v1/resources/:id' do
   halt 401, json(:message => 'bad signature') unless validator.valid? request
 
   not_found = db[:resources].delete(params['id']).nil?
-  halt 404, json(:message => 'no such product') if not_found
+  halt 404, json(:message => 'no such resource') if not_found
 
   status 204
 end
+
+get '/v1/resources/:id/measures' do
+  halt 401, json(:message => 'bad signature') unless validator.valid? request
+
+  resource = db[:resources][params['id']]
+  halt 404, json(:message => 'no such resource') if resource.nil?
+
+  status 200
+  json(
+    :resource_id => params['id'],
+    :period_start => params['period_start'],
+    :period_end => params['period_end'],
+    :measures => { 'feature-a' => 0, 'feature-b' => 1000 }
+  )
+end
+
 
 put '/v1/credentials/:id' do
   halt 401, json(:message => 'bad signature') unless validator.valid? request
