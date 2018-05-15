@@ -34,6 +34,7 @@ enable :sessions
 products = Set.new ['bonnets']
 plans = Set.new ['small', 'large']
 regions = Set.new ['aws::us-east-1']
+importCodes = Set.new ['bonnets-import']
 
 # Our in-memory db
 db = {:resources=> {}, :credentials => {} }
@@ -65,6 +66,7 @@ put '/v1/resources/:id' do
   halt 400, json(:message => 'bad product') unless products.include? body['product']
   halt 400, json(:message => 'bad plan') unless plans.include? body['plan']
   halt 400, json(:message => 'bad region') unless regions.include? body['region']
+  halt 400, json(:message => 'bad import code') unless importCodes.include? body['import-code']
 
   existing = db[:resources][params['id']]
   unless existing.nil?
