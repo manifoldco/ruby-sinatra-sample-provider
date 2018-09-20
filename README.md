@@ -38,7 +38,6 @@ grafton test --product=bonnets --plan=small --region=aws::us-east-1 \
     --connector-port=3001 \
     --new-plan=large \
     --resource-measures='{"feature-a": 0, "feature-b": 1000}' \
-    --import-code=bonnets-import \
     http://localhost:4567
 
 # If everything went well, you'll be greeted with plenty of green check marks!
